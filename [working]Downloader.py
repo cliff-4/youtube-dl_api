@@ -16,26 +16,26 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
 
 def get_service():
-    """Shows basic usage of the Gmail API.
-    Lists the user's Gmail labels.
-    """
-    creds = None
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
-            creds = flow.run_local_server(port=0)
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
+	"""Shows basic usage of the Gmail API.
+	Lists the user's Gmail labels.
+	"""
+	creds = None
+	if os.path.exists('token.pickle'):
+		with open('token.pickle', 'rb') as token:
+			creds = pickle.load(token)
+	if not creds or not creds.valid:
+		if creds and creds.expired and creds.refresh_token:
+			creds.refresh(Request())
+		else:
+			flow = InstalledAppFlow.from_client_secrets_file(
+				'credentials.json', SCOPES)
+			creds = flow.run_local_server(port=0)
+		with open('token.pickle', 'wb') as token:
+			pickle.dump(creds, token)
 
-    service = build('gmail', 'v1', credentials=creds)
+	service = build('gmail', 'v1', credentials=creds)
 
-    return service
+	return service
 # returns service
 
 
@@ -78,9 +78,9 @@ def downloader(message_body):
 			type, link = linkofit.split(" ")
 			try:
 				if type.lower() == 'm':
-				    os.system(f"""/usr/bin/python3 /usr/local/bin/youtube-dl -o "~/Desktop/ytdls/%(title)s.%(ext)s" '{link}' -x --audio-format mp3 {link}""")
+					os.system(f"""/usr/bin/python3 /usr/local/bin/youtube-dl -o "~/Desktop/ytdls/%(title)s.%(ext)s" '{link}' -x --audio-format mp3 {link}""")
 				elif type.lower() == 'v':
-				    os.system(f"""/usr/bin/python3 /usr/local/bin/youtube-dl -o "~/Desktop/ytdls/%(title)s.%(ext)s" '{link}' -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' {link}""")
+					os.system(f"""/usr/bin/python3 /usr/local/bin/youtube-dl -o "~/Desktop/ytdls/%(title)s.%(ext)s" '{link}' -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' {link}""")
 				print("\n")
 			except:
 				print("That line didn't have a link lol continuing\n")
